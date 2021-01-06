@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cake">
+          <Key>
+            <PropertyRef Name="cakeId" />
+          </Key>
+          <Property Name="cakeId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="price" Type="int" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="categoryId" Type="int" />
+          <Property Name="thumbnailPath" Type="char" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="cakeInCart">
+          <Key>
+            <PropertyRef Name="cicId" />
+          </Key>
+          <Property Name="cicId" Type="int" Nullable="false" />
+          <Property Name="cakeId" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="cartId" Type="int" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="cartId" />
+          </Key>
+          <Property Name="cartId" Type="int" Nullable="false" />
+          <Property Name="total" Type="int" />
+          <Property Name="createAt" Type="datetime" />
+          <Property Name="isCompleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="amount" Type="int" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="imgId" />
+          </Key>
+          <Property Name="imgId" Type="int" Nullable="false" />
+          <Property Name="path" Type="char" MaxLength="100" />
+          <Property Name="cakeId" Type="int" />
+        </EntityType>
+        <Association Name="fk_cake">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="cake" Type="Self.cake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="cake">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_img">
+          <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cake">
+              <PropertyRef Name="cakeId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="cakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1">
+          <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+          <End Role="cakeInCart" Type="Self.cakeInCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cake">
+              <PropertyRef Name="cakeId" />
+            </Principal>
+            <Dependent Role="cakeInCart">
+              <PropertyRef Name="cakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2">
+          <End Role="cart" Type="Self.cart" Multiplicity="0..1" />
+          <End Role="cakeInCart" Type="Self.cakeInCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="cartId" />
+            </Principal>
+            <Dependent Role="cakeInCart">
+              <PropertyRef Name="cartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cakeshopModelStoreContainer">
+          <EntitySet Name="cake" EntityType="Self.cake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cakeInCart" EntityType="Self.cakeInCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="image" EntityType="Self.image" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_cake" Association="Self.fk_cake">
+            <End Role="category" EntitySet="category" />
+            <End Role="cake" EntitySet="cake" />
+          </AssociationSet>
+          <AssociationSet Name="fk_img" Association="Self.fk_img">
+            <End Role="cake" EntitySet="cake" />
+            <End Role="image" EntitySet="image" />
+          </AssociationSet>
+          <AssociationSet Name="fk1" Association="Self.fk1">
+            <End Role="cake" EntitySet="cake" />
+            <End Role="cakeInCart" EntitySet="cakeInCart" />
+          </AssociationSet>
+          <AssociationSet Name="fk2" Association="Self.fk2">
+            <End Role="cart" EntitySet="cart" />
+            <End Role="cakeInCart" EntitySet="cakeInCart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cakeshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cake">
+          <Key>
+            <PropertyRef Name="cakeId" />
+          </Key>
+          <Property Name="cakeId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="categoryId" Type="Int32" />
+          <Property Name="thumbnailPath" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="category" Relationship="Self.fk_cake" FromRole="cake" ToRole="category" />
+          <NavigationProperty Name="images" Relationship="Self.fk_img" FromRole="cake" ToRole="image" />
+          <NavigationProperty Name="cakeInCarts" Relationship="Self.fk1" FromRole="cake" ToRole="cakeInCart" />
+        </EntityType>
+        <EntityType Name="cakeInCart">
+          <Key>
+            <PropertyRef Name="cicId" />
+          </Key>
+          <Property Name="cicId" Type="Int32" Nullable="false" />
+          <Property Name="cakeId" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="cartId" Type="Int32" />
+          <NavigationProperty Name="cake" Relationship="Self.fk1" FromRole="cakeInCart" ToRole="cake" />
+          <NavigationProperty Name="cart" Relationship="Self.fk2" FromRole="cakeInCart" ToRole="cart" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="cartId" />
+          </Key>
+          <Property Name="cartId" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Int32" />
+          <Property Name="createAt" Type="DateTime" Precision="3" />
+          <Property Name="isCompleted" Type="Boolean" />
+          <NavigationProperty Name="cakeInCarts" Relationship="Self.fk2" FromRole="cart" ToRole="cakeInCart" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Int32" />
+          <NavigationProperty Name="cakes" Relationship="Self.fk_cake" FromRole="category" ToRole="cake" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="imgId" />
+          </Key>
+          <Property Name="imgId" Type="Int32" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="cakeId" Type="Int32" />
+          <NavigationProperty Name="cake" Relationship="Self.fk_img" FromRole="image" ToRole="cake" />
+        </EntityType>
+        <Association Name="fk_cake">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="cake" Type="Self.cake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="cake">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_img">
+          <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cake">
+              <PropertyRef Name="cakeId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="cakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1">
+          <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+          <End Role="cakeInCart" Type="Self.cakeInCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cake">
+              <PropertyRef Name="cakeId" />
+            </Principal>
+            <Dependent Role="cakeInCart">
+              <PropertyRef Name="cakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2">
+          <End Role="cart" Type="Self.cart" Multiplicity="0..1" />
+          <End Role="cakeInCart" Type="Self.cakeInCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="cartId" />
+            </Principal>
+            <Dependent Role="cakeInCart">
+              <PropertyRef Name="cartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cakeshopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cakes" EntityType="Self.cake" />
+          <EntitySet Name="cakeInCarts" EntityType="Self.cakeInCart" />
+          <EntitySet Name="carts" EntityType="Self.cart" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <AssociationSet Name="fk_cake" Association="Self.fk_cake">
+            <End Role="category" EntitySet="categories" />
+            <End Role="cake" EntitySet="cakes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_img" Association="Self.fk_img">
+            <End Role="cake" EntitySet="cakes" />
+            <End Role="image" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="fk1" Association="Self.fk1">
+            <End Role="cake" EntitySet="cakes" />
+            <End Role="cakeInCart" EntitySet="cakeInCarts" />
+          </AssociationSet>
+          <AssociationSet Name="fk2" Association="Self.fk2">
+            <End Role="cart" EntitySet="carts" />
+            <End Role="cakeInCart" EntitySet="cakeInCarts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cakeshopModelStoreContainer" CdmEntityContainer="cakeshopEntities">
+          <EntitySetMapping Name="cakes">
+            <EntityTypeMapping TypeName="cakeshopModel.cake">
+              <MappingFragment StoreEntitySet="cake">
+                <ScalarProperty Name="cakeId" ColumnName="cakeId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="thumbnailPath" ColumnName="thumbnailPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cakeInCarts">
+            <EntityTypeMapping TypeName="cakeshopModel.cakeInCart">
+              <MappingFragment StoreEntitySet="cakeInCart">
+                <ScalarProperty Name="cicId" ColumnName="cicId" />
+                <ScalarProperty Name="cakeId" ColumnName="cakeId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="cakeshopModel.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="createAt" ColumnName="createAt" />
+                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="cakeshopModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="catId" ColumnName="catId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="cakeshopModel.image">
+              <MappingFragment StoreEntitySet="image">
+                <ScalarProperty Name="imgId" ColumnName="imgId" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="cakeId" ColumnName="cakeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
