@@ -140,21 +140,8 @@ insert into image values (38, 'Data/Donuts_with_chocolate_banana_and_strawberry.
 
 
 
+select * from category;
 
+select * from cake;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-cakeId 	name 	price	description	categoryId	thumbnailPath 
+select * from cake join category on cake.categoryId = category.catId where category.catId = 1;
