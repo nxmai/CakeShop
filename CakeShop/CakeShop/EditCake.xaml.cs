@@ -24,20 +24,22 @@ namespace CakeShop
     {
         public delegate void DeathHandler();
         public event DeathHandler Dying;
-        int cakeId;
+        int cakeId = -1;
+        bool isNewCake = true;
         String oldPath;
         String newPath;
         cake _cake = null;
+        List<String> FilePath = new List<string>();
         public EditCake()
         {
             InitializeComponent();
-            this.cakeId = -1;
         }
         
         public EditCake(int cakeId)
         {
             InitializeComponent();
             this.cakeId = cakeId;
+            isNewCake = false;
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -59,7 +61,7 @@ namespace CakeShop
 
                 cakeThumbnail.Source = thumbnail;
             }
-            if (cakeId != -1)
+            if (!isNewCake)
             {
                 var db = new cakeshopEntities();
                 var oldTrip = db.cakes.Find(cakeId);
@@ -75,9 +77,10 @@ namespace CakeShop
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var db = new cakeshopEntities();
-            if (cakeId == -1)
+            if (isNewCake)
             {
                 CakeCategory.ItemsSource = new BindingList<category>(db.categories.ToList());
+                cakeId = db.cakes.Max(x => x.cakeId) + 1;
             }
             else
             {
@@ -85,12 +88,39 @@ namespace CakeShop
                 CakeName.Foreground = Brushes.Gray;
                 CakeCategory.IsEnabled = false;
                 CakeCategory.Foreground = Brushes.Gray;
+                addThumbail.IsEnabled = false;
 
                 _cake = db.cakes.Find(cakeId);
                 CakeCategory.ItemsSource = new BindingList<category>(db.categories.Where(x => x.catId == _cake.categoryId).ToList());
                 CakeCategory.SelectedIndex = 0;
 
                 CakeName.Text = _cake.name;
+                CakePrice.Text = _cake.price.ToString();
+                CakeDescription.Text = _cake.description;
+
+                cakeThumbnail.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + db.cakes.Find(cakeId).thumbnailPath, UriKind.Absolute));
+                var listImage = db.images.Where(x => x.cakeId == cakeId).ToList();
+                foreach (var tempImage in listImage)
+                {
+
+                    var border = new Border();
+                    border.CornerRadius = new CornerRadius(15);
+
+                    var temp = new ImageBrush();
+                    var uri = new Uri(AppDomain.CurrentDomain.BaseDirectory+ $"{tempImage.path}", UriKind.Absolute);
+                    var bitmap = new BitmapImage(uri);
+                    temp.ImageSource = bitmap;
+
+
+                    border.Background = temp;
+                    border.Width = 100;
+                    border.Height = 90;
+
+                    border.Margin = new Thickness(0, 0, 3, 0);
+
+                    carousel.Children.Add(border);
+                }
+
             }
         }
 
@@ -117,43 +147,36 @@ namespace CakeShop
                 return;
             }
 
-            if (cakeId != -1)
+            var _cakePrice = int.Parse(CakePrice.Text);
+
+            if (CakeDescription.Text.Equals(""))
+            {
+                Notif.Foreground = Brushes.Orange;
+                Notif.Text = "Hãy thêm mô tả cho bánh";
+                return;
+            }
+
+            var _cakeDes = CakeDescription.Text;
+
+            if (!isNewCake)
             {
 
-                /*var oldCake = db.cakes.Find(cakeId);
-*//*
-                Notif.Foreground = Brushes.Green;
-                Notif.Text = "Đã cập nhật thông tin bánh";*//*
+                var oldCake = db.cakes.Find(cakeId);
 
-
-                if (CakeCategory.SelectedIndex != -1)
+                
+                if (!_cakePrice.Equals(oldCake.price))
                 {
-                    var id = ((route)routeNameEdit.SelectedItem).id;
-                    var oldRoute = db.routes.Find(id);
-                    oldRoute.cost = int.Parse(routeMoney.Text);
-                    db.SaveChanges();
-                    Err.Foreground = Brushes.Green;
-                    Err.Text = "Da cap nhat thong tin lo trinh";
+                    oldCake.price = _cakePrice;
                 }
-                else if (routeNameAddNew.Visibility == Visibility.Visible)
-                {
-                    if (routeNameAddNew.Text.Equals(""))
-                    {
-                        Err.Foreground = Brushes.Orange;
-                        Err.Text = "Hay them ten lo trinh";
-                        return;
-                    }
 
-                    var maxId = db.cakes.Max(x => x.cakeId);
-                    cake newCake = new cake();
-                    newCake.cakeId = maxId + 1;
-                    newCake.categoryId = ;
-                    newCake.price = int.Parse(CakePrice.Text);
-                    db.cakes.Add(newCake);
-                    Notif.Foreground = Brushes.Green;
-                    Notif.Text = "Đã thêm mới bánh";
-                    db.SaveChanges();
-                }*/
+                if (!_cakeDes.Equals(oldCake.description))
+                {
+                    oldCake.description = _cakeDes;
+                }
+
+                db.SaveChanges();
+                Notif.Foreground = Brushes.Green;
+                Notif.Text = "Đã cập nhật thông tin bánh";
             }
             else
             {
@@ -172,24 +195,37 @@ namespace CakeShop
                     return;
                 }
 
+                
+
                 CakeName.IsEnabled = false;
                 CakeCategory.IsEnabled = false;
                 addThumbail.IsEnabled = false;
 
                 var _cakeName = CakeName.Text;
+                
                 var _cakeCatId = CakeCategory.SelectedItem;
                 _cake = new cake();
                 _cake.name = _cakeName;
                 _cake.categoryId = ((category)_cakeCatId).catId;
-
+                _cake.description = _cakeDes;
                 _cake.thumbnailPath = _cakeThumbnail;
+                _cake.cakeId = cakeId;
+                _cake.price = _cakePrice;
 
-                _cake.cakeId = db.cakes.Max(x => x.cakeId) + 1;
                 db.cakes.Add(_cake);
                 Notif.Foreground = Brushes.Green;
                 Notif.Text = "Đã thêm mới món bánh";
+                isNewCake = false;
                 db.SaveChanges();
-
+                foreach (var path in FilePath)
+                {
+                    image _image = new image();
+                    _image.imgId = db.images.Max(x => x.imgId) + 1;
+                    _image.cakeId = cakeId;
+                    _image.path = path;
+                    db.images.Add(_image);
+                    db.SaveChanges();
+                }
             }
         }
         private void cakePrice_LostFocus(object sender, RoutedEventArgs e)
@@ -212,6 +248,53 @@ namespace CakeShop
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void addDesPic_Click(object sender, RoutedEventArgs e)
+        {
+            //List<String> FilePath = new List<string>();
+            var screen = new OpenFileDialog();
+            screen.Multiselect = true;
+            if (screen.ShowDialog() == true)
+            {
+                var thumbnailPaths = screen.FileNames;
+                foreach (var thumbnailPath in thumbnailPaths)
+                {
+                    var savePath = "Data/" + Guid.NewGuid() + Path.GetExtension(thumbnailPath);
+                    FilePath.Add(savePath);
+                    File.Copy(thumbnailPath, AppDomain.CurrentDomain.BaseDirectory + savePath, true);
+                    var thumbnail = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + savePath, UriKind.Absolute));
+                    var border = new Border();
+                    border.CornerRadius = new CornerRadius(15);
+
+                    var temp = new ImageBrush();
+
+                    temp.ImageSource = thumbnail;
+
+
+                    border.Background = temp;
+                    border.Width = 100;
+                    border.Height = 90;
+
+                    border.Margin = new Thickness(0, 0, 3, 0);
+
+                    carousel.Children.Add(border);
+                }
+            }
+
+            if (!isNewCake)
+            {
+                foreach (var path in FilePath)
+                {
+                    var db = new cakeshopEntities();
+                    image _image = new image();
+                    _image.imgId = db.images.Max(x => x.imgId) + 1;
+                    _image.cakeId = cakeId;
+                    _image.path = path;
+                    db.images.Add(_image);
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

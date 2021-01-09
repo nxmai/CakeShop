@@ -41,7 +41,7 @@ namespace CakeShop
     {
         public cakeshopEntities db = new cakeshopEntities();
 
-        public string connectionString = "Server=.;Database=cakeshop;Trusted_Connection=True;";
+        public string connectionString = "Server=.\\SQLEXPRESS;Database=cakeshop;Trusted_Connection=True;";
 
         public List<category> cats = new List<category>();
 
@@ -150,6 +150,19 @@ namespace CakeShop
 
             dataListview.ItemsSource = cakeSelect;
 
+        }
+
+        private void addCake_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var addCake = new EditCake();
+            addCake.Dying += ScreenClosing;
+            this.Hide();
+            addCake.Show();
+        }
+
+        private void ScreenClosing()
+        {
+            this.Show();
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CakeShop"
         mc:Ignorable="d"
-        Title="Detail Window" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="Detail Window" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -138,11 +138,16 @@
                     Padding="3 0 10 3"
                     TextWrapping="Wrap"
                     VerticalAlignment="Stretch"
-                    MinWidth="280"
                     AcceptsReturn="True"
                     VerticalScrollBarVisibility="Auto"
                     materialDesign:HintAssist.Hint="Mô tả"
-                    Height="80"/>
+                    Height="150"/>
+                <StackPanel Margin="10">
+                    <Button Name="addDesPic" Click="addDesPic_Click" Width="150" IsEnabled="True">Add Picture</Button>
+                    <ScrollViewer BorderThickness="5" BorderBrush="Black" Margin="0,0,0,15" Height="130" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Name="carousel" Height="120" Orientation="Horizontal"></StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
                 <ListView Name="dataListView" ScrollViewer.HorizontalScrollBarVisibility="Visible" RenderOptions.BitmapScalingMode="HighQuality" 
                       BorderThickness="0" SelectedItem="selectedItem">
                     <ListView.ItemsPanel>
