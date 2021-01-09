@@ -46,12 +46,14 @@ namespace CakeShop
         public List<category> cats = new List<category>();
 
         public List<treeViewProduct> products = new List<treeViewProduct>();
-       
+
+        public List<cake> Cake = new List<cake>();
         
         public MainWindow()
         {
             InitializeComponent();
             cats = db.categories.ToList();
+            Cake = db.cakes.ToList();
             //test(connectionString, 1);
         }
 
@@ -71,7 +73,7 @@ namespace CakeShop
                 products.Add(tmp);
             }
 
-
+            dataListview.ItemsSource = Cake;
             dataTreeview.ItemsSource = products;
         }
 
@@ -105,7 +107,49 @@ namespace CakeShop
             }
         }
 
+        public List<cake> CakeByCatName(string connectionString, string name)
+        {
+            string queryString = $"select * from cake join category on cake.categoryId = category.catId where category.name = '{name}';";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                List<cake> res = new List<cake>();
 
 
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cake tmp = new cake();
+                        tmp.cakeId = Int32.Parse(reader[0].ToString());
+                        tmp.name = reader[1].ToString();
+                        tmp.price = Int32.Parse(reader[2].ToString());
+                        tmp.description = reader[3].ToString();
+                        tmp.categoryId = Int32.Parse(reader[4].ToString());
+                        tmp.thumbnailPath = reader[5].ToString();
+
+                        res.Add(tmp);
+                    }
+                }
+                connection.Close();
+                return res;
+            }
+        }
+
+
+        private void dataTreeView_selectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            List<category> catSelect = new List<category>();
+
+            var item = (sender as TreeView).SelectedItem as treeViewProduct;
+
+            //MessageBox.Show($"{item.Name}");
+
+            List<cake> cakeSelect = CakeByCatName(connectionString, item.Name);
+
+            dataListview.ItemsSource = cakeSelect;
+
+        }
     }
 }

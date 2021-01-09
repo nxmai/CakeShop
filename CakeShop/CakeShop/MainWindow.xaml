@@ -17,6 +17,11 @@
         Title="MainWindow" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Loaded="Window_Loaded" >
 
+    <!--<UserControl.Resources>
+        <local:ImagePatchRelativeToAbsoluteConverter x:Key="imagePathConverter"/>
+        <local:PriceConverter x:Key="PriceConverter"/>
+    </UserControl.Resources>-->
+
     <Window.Background>
         <ImageBrush  ImageSource="Data/Images/background.png" RenderOptions.BitmapScalingMode="HighQuality"/>
     </Window.Background>
@@ -60,7 +65,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <TreeView Name="dataTreeview" Margin="0 50 0 0">
+                <TreeView Name="dataTreeview" Margin="0 50 0 0" SelectedItemChanged="dataTreeView_selectedItemChanged">
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type self:treeViewProduct}" ItemsSource="{Binding item}">
                             <StackPanel Orientation="Horizontal">
@@ -80,16 +85,34 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <ListView Name="dataListView" RenderOptions.BitmapScalingMode="HighQuality">
+                <ListView Name="dataListview"  ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel></WrapPanel>
+                            <UniformGrid Columns="3" Margin="5 0 5 0"></UniformGrid>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
-
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            
+                            <DockPanel>
+                                <Grid Height="200" DockPanel.Dock="Top">
+                                    <Border>
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding thumbnailPath}" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill"></ImageBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </Grid>
+                                <StackPanel DockPanel.Dock="Bottom">
+                                    <Label Padding="0,5" FontSize="20" Foreground="#FF334862" VerticalContentAlignment="Center" Background="{x:Null}" FontWeight="Bold">
+                                        <Label.Content>
+                                            <AccessText TextWrapping="Wrap" Text="{Binding name}" Foreground="#D84452"></AccessText>
+                                        </Label.Content>
+                                    </Label>
+                                    <TextBlock Text="{Binding price}" FontSize="17" Foreground="Black" TextWrapping="Wrap" Background="{x:Null}" VerticalAlignment="Center" TextAlignment="Justify" FontWeight="Bold"></TextBlock>
+                                        <Button Content="MUA HÀNG" FontWeight="Bold" Foreground="{Binding Foreground}" FontSize="16" Padding="8" Background="{x:Null}" BorderBrush="{x:Null}">
+
+                                        </Button>
+                                </StackPanel>
+                            </DockPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

@@ -165,6 +165,46 @@
       <DependentUpon>cakeshop.edmx</DependentUpon>
       <LastGenOutput>cakeshop.cs</LastGenOutput>
     </Content>
+    <Resource Include="Data\%28443x443%29_fh_Bong_lan_cuon_Pho_mai_trung_muoi.jpg" />
+    <Resource Include="Data\11-442152bf-ae65-4a11-a143-5b0524187352.png" />
+    <Resource Include="Data\15032237_10154613820183950_7926599802731564217_n.jpg" />
+    <Resource Include="Data\6361690607_0229b7b768_z.jpg" />
+    <Resource Include="Data\8zEvGi.jpg" />
+    <Resource Include="Data\BAKERY-STYLE-CHOCOLATE-CHIP-COOKIES-9.jpg" />
+    <Resource Include="Data\banh-kem-dolce-vita-mousse-chanh-day.png" />
+    <Resource Include="Data\banh-kem-dolce-vita-mousse-matcha.png" />
+    <Resource Include="Data\banh-kem-dolce-vita-tiramisu-3.png" />
+    <Resource Include="Data\banh-mi-cua-sua-002.jpg" />
+    <Resource Include="Data\banh-mi-cua-sua-004.jpg" />
+    <Resource Include="Data\banh-my-hoa-cuc-330g_2019-12-02-173941.jpg" />
+    <Resource Include="Data\banhmyhoacuc.jpg" />
+    <Resource Include="Data\Chocolate-Chip-Cookies-Recipe-720x720.jpg" />
+    <Resource Include="Data\cong-thuc-lam-banh-mi-hoa-cu.jpg" />
+    <Resource Include="Data\cooky-recipe-cover-r35488.jpg" />
+    <Resource Include="Data\dark-chocolate-brownie-cake-dolce-vita-banh-socola-tiem-banh-quan-3-2.png" />
+    <Resource Include="Data\dark-chocolate-brownie-cake-dolce-vita-banh-socola-tiem-banh-quan-3.png" />
+    <Resource Include="Data\Donuts_with_chocolate_banana_and_strawberry.jpg" />
+    <Resource Include="Data\iStock-936102564.jpg" />
+    <Resource Include="Data\jacob-boavista-B6kBrzkl3YQ-unsplash.jpg" />
+    <Resource Include="Data\matcha-yogurt-mousse-banh-kem-tra-xanh-sua-chua-tiem-banh-dolce-vita-quan-1.png" />
+    <Resource Include="Data\matcha-yogurt-mousse-banh-kem-tra-xanh-sua-chua-tiem-banh-dolce-vita-quan-3.png" />
+    <Resource Include="Data\maxresdefault.jpg" />
+    <Resource Include="Data\passion-fruit-cheesecake-product-1.jpg" />
+    <Resource Include="Data\passion-fruit-mousse-tiem-banh-dolce-vita-quan-1.png" />
+    <Resource Include="Data\passion-fruit-mousse-tiem-banh-dolce-vita-quan-4.png" />
+    <Resource Include="Data\photo-1486427944299-d1955d23e34d.jpg" />
+    <Resource Include="Data\photo-1486428128344-5413e434ad35.jpg" />
+    <Resource Include="Data\photo-1579306194872-64d3b7bac4c2.jpg" />
+    <Resource Include="Data\photo-1579306194873-1be32997525a.jpg" />
+    <Resource Include="Data\photo-1582760999829-592ad50c53e3.jpg" />
+    <Resource Include="Data\photo-1582760999860-bc6c933093da.jpg" />
+    <Resource Include="Data\photo-1605499502594-e30c84a55cf9.jpg" />
+    <Resource Include="Data\photo-1605499502603-e7a7866a9066.jpg" />
+    <Resource Include="Data\photo-1605499502803-8109c2eec0ca.jpg" />
+    <Resource Include="Data\The-Best-Chocolate-Chip-Cookies-2.jpg" />
+    <Resource Include="Data\tiramisu-mousse-cake-banh-kem-y-quan-1.png" />
+    <Resource Include="Data\tiramisu-mousse-cake-banh-kem-y-quan-3.png" />
+    <Resource Include="Data\unnamed.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
