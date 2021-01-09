@@ -1,0 +1,67 @@
+﻿<Window x:Class="CakeShop.StatisticsScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CakeShop"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="StatisticsScreen" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.Background>
+        <ImageBrush  ImageSource="Data/Images/background.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+    </Window.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="1.0*" />
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.75*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <TextBlock Text="TRANG CHỦ" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <TextBlock Text="THÊM SẢN PHẨM" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <TextBlock Text="THỐNG KÊ" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="4">
+                <TextBlock Text="GIỎ HÀNG" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <lvc:CartesianChart Margin="0,20,0,0" Height="350" Name="columnChart" Width="450" Hoverable="True"   LegendLocation="Bottom">
+
+                </lvc:CartesianChart>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <lvc:PieChart Margin="0,60,0,0" Height="300" Name="pieChart" Width="350" Hoverable="True" DataClick="pieClick" LegendLocation="Bottom">
+
+                </lvc:PieChart>
+            </StackPanel>
+        </Grid>
+       
+
+    </Grid>
+</Window>
