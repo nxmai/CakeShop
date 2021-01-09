@@ -179,5 +179,13 @@ namespace CakeShop
             this.Hide();
             detail.Show();
         }
+
+        private void ShoppingCart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var s = new ShoppingCart();
+            s.Dying += ScreenClosing;
+            this.Hide();
+            s.Show();
+        }
     }
 }

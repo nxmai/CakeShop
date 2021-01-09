@@ -54,7 +54,7 @@
             </Grid>
 
             <Grid Grid.Column="4">
-                <TextBlock Text="GIỎ HÀNG" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                <TextBlock Name="ShoppingCart" Text="GIỎ HÀNG" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452" MouseLeftButtonUp="ShoppingCart_MouseLeftButtonUp"></TextBlock>
             </Grid>
         </Grid>
 
