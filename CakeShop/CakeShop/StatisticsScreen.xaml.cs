@@ -20,7 +20,7 @@ namespace CakeShop
     /// Interaction logic for StatisticsScreen.xaml
     /// </summary>
     /// 
-   
+
     public partial class StatisticsScreen : Window
     {
 
@@ -32,14 +32,14 @@ namespace CakeShop
             createPieChart();
         }
 
-       
+
 
         private void createColumnChart()
         {
             SeriesCollection columnData = new SeriesCollection();
 
-            int [] revenue= new int[12];
-            for (int i =0;i<revenue.Length; i++)
+            int[] revenue = new int[12];
+            for (int i = 0; i < revenue.Length; i++)
             {
                 revenue[i] = 0;
             }
@@ -50,14 +50,14 @@ namespace CakeShop
             {
                 int month = temp.createAt.Value.Month;
 
-                revenue[month-1] += (int) temp.total;
+                revenue[month - 1] += (int)temp.total;
             }
 
-            for (int i= 0; i<revenue.Length; i++)
+            for (int i = 0; i < revenue.Length; i++)
             {
                 columnData.Add(new ColumnSeries
                 {
-                    Title = "Tháng " + (i+1).ToString(),
+                    Title = "Tháng " + (i + 1).ToString(),
                     Values = new ChartValues<float> { revenue[i] },
 
                 });
@@ -97,8 +97,8 @@ namespace CakeShop
                          }).Join(
                 db.carts,
                 pd => pd.cartid,
-                c =>c.cartId,
-                (pd,c) => new{
+                c => c.cartId,
+                (pd, c) => new {
                     catID = pd.catID,
                     price = pd.price,
                     amount = pd.amount,
@@ -110,7 +110,7 @@ namespace CakeShop
                 (key, listCol) => new
                 {
                     catID = key,
-                    revenue = listCol.Sum(total => total.price *  total.amount)
+                    revenue = listCol.Sum(total => total.price * total.amount)
                 }
                 ).Join(db.categories,
                 pd => pd.catID,
@@ -125,7 +125,7 @@ namespace CakeShop
 
             SeriesCollection piechartData = new SeriesCollection();
 
-            foreach (var temp  in  querry)
+            foreach (var temp in querry)
             {
                 piechartData.Add(new PieSeries
                 {

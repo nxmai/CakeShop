@@ -61,7 +61,7 @@
                 </lvc:PieChart>
             </StackPanel>
         </Grid>
-       
+
 
     </Grid>
 </Window>
