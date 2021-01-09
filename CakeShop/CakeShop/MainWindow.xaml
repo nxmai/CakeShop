@@ -115,7 +115,11 @@
                             </DockPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="seeDetail_MouseLeftButtonDown" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </Grid>
         </Grid>

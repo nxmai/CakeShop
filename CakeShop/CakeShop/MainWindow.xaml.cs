@@ -54,6 +54,10 @@ namespace CakeShop
             InitializeComponent();
             cats = db.categories.ToList();
             Cake = db.cakes.ToList();
+            foreach (var cake in Cake)
+            {
+                cake.thumbnailPath = AppDomain.CurrentDomain.BaseDirectory + cake.thumbnailPath;
+            }
             //test(connectionString, 1);
         }
 
