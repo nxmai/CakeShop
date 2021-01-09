@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CakeShop"
         mc:Ignorable="d"
-        Title="Detail Window" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Detail Window" Height="650" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -131,7 +131,7 @@
                     <TextBlock  Text="{Binding catName}" Padding="70,0,0,0"  FontSize="16" FontWeight="Bold" VerticalAlignment="Center">
 
                     </TextBlock>
-                    <Button Margin="150,0,0,0" FontSize="15" FontWeight="Medium" Style="{DynamicResource RoundedButton}" Background="Pink" Content="Cập Nhật Thông Tin Bánh!" HorizontalAlignment="Right" Width="190"></Button>
+                    <Button Name="updateCake" Margin="150,0,0,0" FontSize="15" FontWeight="Medium" Style="{DynamicResource RoundedButton}" Background="Pink" Content="Cập Nhật Thông Tin Bánh!" HorizontalAlignment="Right" Width="190" Click="updateCake_Click"></Button>
 
                 </StackPanel>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

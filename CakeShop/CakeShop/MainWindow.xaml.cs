@@ -164,5 +164,16 @@ namespace CakeShop
         {
             this.Show();
         }
+
+        private void seeDetail_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as FrameworkElement).DataContext;
+            var id = (item as cake).cakeId;
+
+            DetailScreen detail = new DetailScreen(id);
+            detail.Dying += ScreenClosing;
+            this.Hide();
+            detail.Show();
+        }
     }
 }

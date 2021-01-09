@@ -31,6 +31,8 @@ namespace CakeShop
     }
     public partial class DetailScreen : Window
     {
+        public delegate void DeathHandler();
+        public event DeathHandler Dying;
         cakeshopEntities db = new cakeshopEntities();
         cakeDetail detail = new cakeDetail();
         List<image> listImage = new List<image>();
@@ -323,6 +325,23 @@ namespace CakeShop
             }
 
             
+        }
+
+        private void updateCake_Click(object sender, RoutedEventArgs e)
+        {
+            var addCake = new EditCake(cakeDetailID);
+            addCake.Dying += ScreenClosing;
+            this.Hide();
+            addCake.Show();
+        }
+        private void ScreenClosing()
+        {
+            this.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Dying?.Invoke();
         }
     }
 }
