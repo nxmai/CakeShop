@@ -84,6 +84,13 @@ namespace CakeShop
             var item = (sender as FrameworkElement).DataContext;
             db.cakeInCarts.Remove(db.cakeInCarts.Find((item as CakeInCart).cic));
             ShoppingCartList.Remove((item as CakeInCart));
+            totalCost -= (item as CakeInCart).price * (item as CakeInCart).amount;
+            total.Text = totalCost.ToString();
+            if (totalCost==0)
+            {
+                Title.Text = "GIỎ HÀNG TRỐNG";
+                Payment.IsEnabled = false;
+            }
             db.SaveChanges();
         }
 

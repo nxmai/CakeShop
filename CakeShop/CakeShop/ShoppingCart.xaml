@@ -253,7 +253,7 @@
                                                             <TextBlock Text=" x" FontSize="18" FontWeight="Bold" Foreground="#D84452"/>
                                                             <TextBlock Text="{Binding amount}" FontSize="18" FontWeight="Bold" Foreground="#D84452"/>
                                                         </StackPanel>
-                                                        <TextBlock Width="90" Text="{Binding price}" TextAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                                        <TextBlock Width="90" Text="{Binding total}" TextAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
                                                     </DockPanel>
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
