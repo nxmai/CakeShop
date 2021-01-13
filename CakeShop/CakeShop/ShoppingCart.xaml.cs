@@ -44,11 +44,14 @@ namespace CakeShop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Cart.Visibility = Visibility.Visible;
+            Order.Visibility = Visibility.Collapsed;
             var db = new cakeshopEntities();
             var cakeInCart = db.carts.Where(x => x.isCompleted == false).Select(y=>y.cakeInCarts).FirstOrDefault();
             if (cakeInCart == null)
             {
                 Title.Text = "GIỎ HÀNG TRỐNG";
+                Payment.IsEnabled = false;
                 return;
             }
             foreach (var c in cakeInCart)
@@ -64,9 +67,9 @@ namespace CakeShop
                 ShoppingCartList.Add(_c);
             }
             data.ItemsSource = ShoppingCartList;
+            data1.ItemsSource = ShoppingCartList;
+            TotalCost.Text = totalCost.ToString();
             total.Text = totalCost.ToString();
-            Cart.Visibility = Visibility.Visible;
-            Order.Visibility = Visibility.Collapsed;
             Title.Text = "SHOPPING CART";
         }
 
@@ -93,6 +96,13 @@ namespace CakeShop
             Cart.Visibility = Visibility.Collapsed;
             Order.Visibility = Visibility.Visible;
             Title.Text= "ORDER COMPLETE";
+            OrderID.Text = db.carts.Find(id).cartId.ToString();
+            DateCreated.Text = db.carts.Find(id).createAt.ToString();
+        }
+
+        private void finish_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

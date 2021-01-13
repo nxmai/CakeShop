@@ -108,7 +108,7 @@
                        Foreground="DarkRed" Text="SHOPPING CART">
             </TextBlock>
         </StackPanel>
-        <Grid Grid.Row="2" Name="Cart" Visibility="Collapsed">
+        <Grid Grid.Row="2" Name="Cart" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1*"/>
@@ -141,7 +141,7 @@
                                                        VerticalAlignment="Center"
                                                        Margin="5 0 0 0 "
                                                        TextWrapping="Wrap"
-                                                       MaxWidth="120"/>
+                                                       MaxWidth="100"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -202,11 +202,95 @@
                                                        FontWeight="DemiBold"
                                                        Foreground="DarkRed"></TextBlock>
                 </Grid>
-                <Button Margin="5" Background="DarkRed" Foreground="White" FontSize="20" Height="40" VerticalContentAlignment="Center" Click="Payment_Click">Thanh Toán</Button>
+                <Button Name="Payment" Margin="5" Background="DarkRed" Foreground="White" FontSize="20" Height="40" VerticalContentAlignment="Center" Click="Payment_Click">Thanh Toán</Button>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="3" Name="Order" Visibility="Visible">
+        <Grid Grid.Row="3" Name="Order" Visibility="Collapsed">
             <!-- ORDER COMPLETE TAI DAY-->
+            <StackPanel>
+                <TextBlock Text="Cảm ơn bạn đã mua hàng!!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" FontStyle="Italic"></TextBlock>
+                <StackPanel Margin="20 5 20 5">
+                    <StackPanel Margin="0 5 0 5" Orientation="Horizontal">
+                        <TextBlock Text="Mã đơn hàng: " VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                        <TextBlock Name="OrderID" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="0 5 0 5" Orientation="Horizontal">
+                        <TextBlock Text="Ngày tạo: " VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                        <TextBlock Name="DateCreated" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="0 5 0 5" Orientation="Horizontal">
+                        <Border BorderThickness="3" BorderBrush="DarkRed" Height="320" Width="950">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="65"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                                    <Grid Margin="10 0 10 0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="CHI TIẾT ĐƠN HÀNG" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SẢN PHẨM" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="THÀNH TIỀN" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1">
+                                    <Line X1="10" X2="930" Y1="1" Y2="1" StrokeThickness="3" Stroke="PaleVioletRed"></Line>
+                                    <ScrollViewer Padding="5" Height="192" Width="940">
+                                        <ListView Name="data1" ItemsSource="{Binding ShoppingCartList}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <DockPanel LastChildFill="True">
+                                                        <StackPanel Orientation="Horizontal" Width="800">
+                                                            <TextBlock Text="{Binding name}" FontSize="18" FontWeight="Bold" Foreground="#D84452"/>
+                                                            <TextBlock Text=" x" FontSize="18" FontWeight="Bold" Foreground="#D84452"/>
+                                                            <TextBlock Text="{Binding amount}" FontSize="18" FontWeight="Bold" Foreground="#D84452"/>
+                                                        </StackPanel>
+                                                        <TextBlock Width="90" Text="{Binding price}" TextAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                                    </DockPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </ScrollViewer>
+                                    <Line X1="10" X2="930" Y1="1" Y2="1" StrokeThickness="3" Stroke="PaleVioletRed"></Line>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" VerticalAlignment="Top">
+                                    <Grid Margin="10 0 10 0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <TextBlock Text="TỔNG : " HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                        <TextBlock Name="TotalCost" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold" Foreground="#D84452"></TextBlock>
+                                        </StackPanel>
+                                    <Button
+                                        Name="finish"
+                                        Grid.Row="1" Grid.ColumnSpan="2"
+                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                        Width="100"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                        Click="finish_Click">
+                                        OK
+                                    </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 
