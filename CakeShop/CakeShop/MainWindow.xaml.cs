@@ -147,13 +147,21 @@ namespace CakeShop
         {
             List<category> catSelect = new List<category>();
 
-            var item = (sender as TreeView).SelectedItem as treeViewProduct;
-
-            //MessageBox.Show($"{item.Name}");
-
-            List<cake> cakeSelect = CakeByCatName(connectionString, item.Name);
-
-           // dataListview.ItemsSource = cakeSelect;
+            var item = (sender as TreeView).SelectedItem;
+            var b = item.GetType();
+            if (b.Name == "treeViewProduct")
+            {
+                List<cake> cakeSelect = CakeByCatName(connectionString, (item as treeViewProduct).Name);
+                dataListview.ItemsSource = cakeSelect;
+            }
+            else
+            if (b.Name == "cake")
+            {
+                List<cake> cakeSelect = new List<cake>();
+                cakeSelect.Add(item as cake);
+                dataListview.ItemsSource = cakeSelect;
+            }
+            
 
         }
 

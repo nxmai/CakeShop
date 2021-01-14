@@ -108,7 +108,7 @@
                                         </Label.Content>
                                     </Label>
                                     <TextBlock Text="{Binding price}" FontSize="17" Foreground="Black" TextWrapping="Wrap" Background="{x:Null}" VerticalAlignment="Center" TextAlignment="Justify" FontWeight="Bold"></TextBlock>
-                                        <Button Content="MUA HÀNG" FontWeight="Bold" Foreground="{Binding Foreground}" FontSize="16" Padding="8" Background="{x:Null}" BorderBrush="{x:Null}">
+                                        <Button Content="MUA HÀNG" FontWeight="Bold" Foreground="Black" FontSize="16" Padding="8" Background="{x:Null}" BorderBrush="{x:Null}">
 
                                         </Button>
                                 </StackPanel>
