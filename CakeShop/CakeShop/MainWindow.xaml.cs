@@ -151,7 +151,7 @@ namespace CakeShop
 
             //MessageBox.Show($"{item.Name}");
 
-            List<cake> cakeSelect = CakeByCatName(connectionString, db.categories.Find(item).name);
+            List<cake> cakeSelect = CakeByCatName(connectionString, item.Name);
 
            // dataListview.ItemsSource = cakeSelect;
 
