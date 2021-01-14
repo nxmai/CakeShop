@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace CakeShop
 {
@@ -186,6 +187,22 @@ namespace CakeShop
             s.Dying += ScreenClosing;
             this.Hide();
             s.Show();
+        }
+
+        private void Window_SourceInitialized(object sender, EventArgs e)
+        {
+            bool showSplash;
+            var value = ConfigurationManager.AppSettings["ShowSplashScreen"];
+            showSplash = bool.Parse(value);
+            if (showSplash == false)
+            {
+                return;
+            }
+            else
+            {
+                var sc = new SplashScreen();
+                sc.ShowDialog();
+            }
         }
     }
 }

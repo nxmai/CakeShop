@@ -207,15 +207,33 @@
       <DependentUpon>cakeshop.edmx</DependentUpon>
       <LastGenOutput>cakeshop.cs</LastGenOutput>
     </Content>
-    <Resource Include="SplashScreen\1.jpg" />
-    <Resource Include="SplashScreen\2.jpg" />
-    <Resource Include="SplashScreen\3.jpg" />
-    <Resource Include="SplashScreen\4.jpg" />
-    <Resource Include="SplashScreen\5.jpg" />
-    <Resource Include="SplashScreen\6.jpg" />
-    <Resource Include="SplashScreen\7.jpg" />
-    <Resource Include="SplashScreen\8.jpg" />
-    <Resource Include="SplashScreen\9.jpg" />
+    <None Include="SplashImages\1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SplashImages\9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
