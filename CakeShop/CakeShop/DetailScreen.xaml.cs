@@ -56,6 +56,7 @@ namespace CakeShop
         }
         private void loadCakeDetailFromDB(int cakeID)
         {
+            var db = new cakeshopEntities();
             var tempListCake = db.cakes.Where(p => p.cakeId == cakeID).ToList();
             cake tempcake = new cake();
             if (tempListCake.Count() > 0)
@@ -81,6 +82,7 @@ namespace CakeShop
 
         private string getCatName (int catID)
         {
+            var db = new cakeshopEntities();
             string result = "";
             var cat = new List<category> (db.categories.Where(p => p.catId == catID).ToList());
            
@@ -99,6 +101,7 @@ namespace CakeShop
         }
         private void loadListImageFromDB(int cakeID)
         {
+            var db = new cakeshopEntities();
             listImage = new List<image>(db.images.Where(p => p.cakeId == cakeID).ToList());
 
         }
@@ -198,7 +201,7 @@ namespace CakeShop
 
         private void addToCartClick(object sender, RoutedEventArgs e)
         {
-
+            var db = new cakeshopEntities();
             int amountNumber = 0;
             bool check = Int32.TryParse(amountTxt.Text, out amountNumber);
             if (check == false)
@@ -331,12 +334,20 @@ namespace CakeShop
         {
             var addCake = new EditCake(cakeDetailID);
             addCake.Dying += ScreenClosing;
+
             this.Hide();
             addCake.Show();
         }
         private void ScreenClosing()
         {
+
             this.Show();
+            db = new cakeshopEntities();
+            detail = new cakeDetail();
+            listImage = new List<image>();
+            loadDataFromDB(cakeDetailID);
+            this.DataContext = detail;
+            createCarousel();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
