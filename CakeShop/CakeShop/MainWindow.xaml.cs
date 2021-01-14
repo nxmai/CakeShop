@@ -41,7 +41,7 @@ namespace CakeShop
     {
         public cakeshopEntities db = new cakeshopEntities();
 
-        public string connectionString = "Server=.\\SQLEXPRESS;Database=cakeshop;Trusted_Connection=True;";
+        public string connectionString = "Server=.;Database=cakeshop;Trusted_Connection=True;";
 
         public List<category> cats = new List<category>();
 
