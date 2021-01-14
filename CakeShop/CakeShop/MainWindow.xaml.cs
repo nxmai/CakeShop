@@ -102,7 +102,7 @@ namespace CakeShop
                         tmp.price = Int32.Parse(reader[2].ToString());
                         tmp.description = reader[3].ToString();
                         tmp.categoryId = Int32.Parse(reader[4].ToString());
-                        tmp.thumbnailPath = reader[5].ToString();
+                        tmp.thumbnailPath = AppDomain.CurrentDomain.BaseDirectory + reader[5].ToString();
                         
                         res.Add(tmp);
                     }
@@ -132,7 +132,7 @@ namespace CakeShop
                         tmp.price = Int32.Parse(reader[2].ToString());
                         tmp.description = reader[3].ToString();
                         tmp.categoryId = Int32.Parse(reader[4].ToString());
-                        tmp.thumbnailPath = reader[5].ToString();
+                        tmp.thumbnailPath = AppDomain.CurrentDomain.BaseDirectory + reader[5].ToString();
 
                         res.Add(tmp);
                     }
@@ -151,9 +151,9 @@ namespace CakeShop
 
             //MessageBox.Show($"{item.Name}");
 
-            List<cake> cakeSelect = CakeByCatName(connectionString, item.Name);
+            List<cake> cakeSelect = CakeByCatName(connectionString, db.categories.Find(item).name);
 
-            dataListview.ItemsSource = cakeSelect;
+           // dataListview.ItemsSource = cakeSelect;
 
         }
 
